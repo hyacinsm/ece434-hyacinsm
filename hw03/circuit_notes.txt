@@ -1,0 +1,3 @@
+
+Top T101 Address(HIGH):	 	 1001010
+Bottom T101 Address(GND):	 1001010 
