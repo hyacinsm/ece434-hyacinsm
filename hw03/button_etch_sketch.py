@@ -33,6 +33,20 @@ BOARD_COLS = 8
 sketch_board = [[" " for i in range(BOARD_COLS)] for j in range(BOARD_ROWS)]
 cursor = [0, 0]
 
+# encoders
+eQEP_VERT = '2'
+eQEP_HORI = '1'
+
+COUNTERPATH_VERT = '/dev/bone/counter/'+eQEP_VERT+'/count0'
+COUNTERPATH_HORI = '/dev/bone/counter/'+eQEP_HORI+'/count0'
+
+encoders = [COUNTERPATH_HORI, COUNTERPATH_VERT]
+
+ms = 100  # Time between samples in ms
+MAX_COUNT = '10000'
+old_data = [-1, -1]
+
+
 # smbus matrix configuration
 bus = smbus.SMBus(2)  # Use i2c bus 2
 matrix = 0x70         # Use address 0x70
@@ -58,6 +72,61 @@ chip = gpiod.Chip(CHIP)
 
 getlines = chip.get_lines(getoffsets)
 getlines.request(consumer=CONSUMER, type=gpiod.LINE_REQ_EV_BOTH_EDGES)
+
+
+def read_encoders():
+    # represents change in the horizontal, vertical
+    delta = [0, 0]
+    for i, path in enumerate(encoders):
+        f = open(path+'/count', 'r')
+
+        f.seek(0)
+        data = f.read()[:-1]
+        # Print only if data changes
+        if data != old_data[i]:
+            delta[i] = int(old_data[i]) - int(data)
+            old_data[i] = data
+            print(f"Encoder {i+1} data = " + data)
+        time.sleep(ms/1000)
+        f.close()
+
+    if (delta[1] > 0):
+        return 'w'
+    elif (delta[1] < 0):
+        return 's'
+    elif (delta[0] > 0):
+        return 'd'
+    elif (delta[0] < 0):
+        return 'a'
+    else:
+        return ""
+
+# Set the eEQP maximum count
+
+
+def set_encoders_max():
+    for path in encoders:
+        f = open(path+'/ceiling', 'w')
+        f.write(MAX_COUNT)
+        f.close()
+
+# Clear the eEQP count
+
+
+def set_encoders_min():
+    for path in encoders:
+        f = open(path+'/count', 'w')
+        f.write(str(5000))
+        f.close()
+
+# Enable
+
+
+def enable_encoders():
+    for path in encoders:
+        f = open(path+'/enable', 'w')
+        f.write('1')
+        f.close()
 
 # combines the channels alternatin between green value and red value, creating 16 element list
 # [g0, r0, g1, r1, .. gN,rN]
@@ -169,13 +238,16 @@ def gpio_input():
     return offset_2_cmd.get(vals.index(1)) if 1 in vals else ""
 
 
+set_encoders_max()
+set_encoders_min()
+enable_encoders()
 clear_board(sketch_board)
 update_pos()
 print_board(sketch_board)
 print("Pos 1 - up\nPos 2 - down\nPos 3 - left\nPos 4 - right\n*Press multiple buttons to clear board")
 
 while True:
-    cmd = input("Enter your move here: ")
+    cmd = read_encoders()
     if cmd != "":
         parse_cmd(cmd)
         print_board(sketch_board)
