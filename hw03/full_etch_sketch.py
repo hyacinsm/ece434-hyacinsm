@@ -4,19 +4,14 @@
 #   Author: Sean Hyacinthe
 #   Date: 12/18/23
 #
-#   #TODO: update summary
-# 	Runs an etch-sketch game using buttong connected as described in the
-#   wiring diagram. Led's are physically wired to button to indicate a
-#   sucessful press. Buttons are active high.
+# 	Runs an etch-sketch game on an LED matrix with to rotary encoders for
+#   drawing. Hold finger on temp sensor to clear board. Press Ctrl -C to quit
 #
-#   * if mulitple buttons are pressed at once the board is cleared
-#
-# 	#TODO: Fix wiring description
-#   Wiring:	Yellow:     Pos 1 btn(P8_16) - Up
-#           Green :     Pos 2 btn(P9_14) - Down
-#           Red   :     Pos 3 btn(P9_16) - Left
-#           Blue  :     Pos 4 btn(P9_23) - Right
-#           LED's anode are connected to same node as each button gnd terminal
+#   Setup : run the ./setup.sh to configure the needed pins
+#   Wiring:	tmp101_gnd is has pin add0 wired to GND
+#           tmp101_vcc is has pin add0 wired to 3.3 V
+#           SDA is running on P9_22
+#           SCL is running on P9_21
 
 
 import gpiod
@@ -47,6 +42,9 @@ MAX_COUNT = '10000'
 old_data = [-1, -1]
 
 
+# smbus temp
+sensor_addresses = [0x48, 0x4a]
+
 # smbus matrix configuration
 bus = smbus.SMBus(2)  # Use i2c bus 2
 matrix = 0x70         # Use address 0x70
@@ -58,20 +56,6 @@ bus.write_byte_data(matrix, 0xe7, 0)   # Full brightness (page 15)
 
 green_channel = [0x0a for i in range(BOARD_COLS)]
 red_channel = [0x00 for i in range(BOARD_COLS)]
-
-
-# gpio d stuff
-CONSUMER = 'getset'
-CHIP = '1'
-getoffsets = [14, 18, 19, 17]
-idx = [0, 1, 2, 3]
-offset_cmd = ["w", "s", "a", "d"]
-offset_2_cmd = dict(zip(idx, offset_cmd))
-
-chip = gpiod.Chip(CHIP)
-
-getlines = chip.get_lines(getoffsets)
-getlines.request(consumer=CONSUMER, type=gpiod.LINE_REQ_EV_BOTH_EDGES)
 
 
 def read_encoders():
@@ -224,18 +208,11 @@ def parse_cmd(cmd):
     draw()
 
 
-def gpio_input():
-    ev_lines = getlines.event_wait(sec=1)
-    if ev_lines:
-        for line in ev_lines:
-            event = line.event_read()
-    vals = getlines.get_values()
-
-    # checks if multiple buttons are pressed
-    if vals.count(1) > 1:
-        return "c"
-
-    return offset_2_cmd.get(vals.index(1)) if 1 in vals else ""
+def read_tmp():
+    temp = [0, 0]
+    for i, sensor in enumerate(sensor_addresses):
+        temp[i] = bus.read_byte_data(sensor, 0)
+    return temp
 
 
 set_encoders_max()
@@ -244,10 +221,15 @@ enable_encoders()
 clear_board(sketch_board)
 update_pos()
 print_board(sketch_board)
-print("Pos 1 - up\nPos 2 - down\nPos 3 - left\nPos 4 - right\n*Press multiple buttons to clear board")
 
 while True:
-    cmd = read_encoders()
-    if cmd != "":
-        parse_cmd(cmd)
-        print_board(sketch_board)
+    temps = read_tmp()
+    if (any(t > 25 for t in temps)):
+        clear_board(sketch_board)
+        time.sleep(3)
+    else:
+        cmd = read_encoders()
+        if cmd != "":
+            parse_cmd(cmd)
+            print_board(sketch_board)
+    time.sleep(0.25)
