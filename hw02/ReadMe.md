@@ -1,5 +1,12 @@
 # ECE 434 Embedded Linux HW01 #
 #### <center> Date: 12/11/23 &emsp; By: Sean Hyacinthe
+
+#### Homework Overview
+
+Parts 1-3 compared performance across c and python scripts for various GPIO methods on the BBB. The results are compiled into two table under sections 2.3 & 3.1
+
+The "button_etch_sketch" is an extension of the hw01 etch a sketch program. Instead of using terminal input, buttons were added. My actual circuit wiring is described in the python file. To use the program, just run the file. Controls are explained in the python file.
+
 ### <center> <u> Measuring GPIO on Oscilloscope </u>
 
 #### 1. Shell Script
