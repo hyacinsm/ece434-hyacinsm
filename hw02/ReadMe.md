@@ -95,3 +95,16 @@ The "button_etch_sketch" is an extension of the hw01 etch a sketch program. Inst
 | 0.000375    | 0.00126     | 17.5      | 0.000375   | 0.00140     | 20.4      |
 | 0.00075     | 0.0022      | 20.8      | 0.00075    | 0.0022      | 15.5      |
 
+# hw02 grading
+
+| Points      | Description | Comment
+| ----------- | ----------- | -------
+|  2/2 | Buttons and LEDs 
+|  8/8 | Etch-a-Sketch works
+|  2/2 | Measuring a gpio pin on an Oscilloscope 
+|  2/2 | Questions answered
+|  4/4 | Table complete
+|  2/2 | gpiod
+| 20/20   | **Total**
+
+Tables look good.
