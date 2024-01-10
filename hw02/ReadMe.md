@@ -25,6 +25,7 @@ The "button_etch_sketch" is an extension of the hw01 etch a sketch program. Inst
 1.4 Tables of results from varying sleep duration in ./blinkLED.sh
 
 <center> 
+
 | Sleep       | Period (s)   |CPU Usage %|
 | :---        |    :----:    |      ---: |
 | 0.0015      | < 0.030      | 88.1      |
