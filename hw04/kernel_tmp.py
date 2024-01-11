@@ -7,7 +7,7 @@
 #   Description: The script reads the value of two tmp101 sensors every 1 second
 #
 #   Setup:
-#           ./setup..sh
+#           ./setup.sh
 #
 #   Wiring:
 #           tmp101_gnd is has pin add0 wired to GND

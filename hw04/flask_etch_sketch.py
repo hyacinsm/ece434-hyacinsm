@@ -193,13 +193,13 @@ def parse_cmd(cmd):
         clear_board(sketch_board)
 
     if pcmd == "left":
-        update_pos(cursor[0]-1, cursor[1])
+        update_pos(cursor[0], cursor[1]+1)
     elif pcmd == "right":
         update_pos(cursor[0], cursor[1]-1)
     elif pcmd == "up":
         update_pos(cursor[0]+1, cursor[1])
     elif pcmd == "down":
-        update_pos(cursor[0], cursor[1]+1)
+        update_pos(cursor[0]-1, cursor[1])
     else:
         return
     draw()
