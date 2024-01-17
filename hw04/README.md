@@ -65,3 +65,17 @@ mmap_toggle.py - is the script used for gathering data on the toggle speed of mm
 | 0.00001  |  0.000217  |
 
 </center>
+
+# hw04 grading
+
+| Points      | Description | |
+| ----------- | ----------- | - |
+|  2/2 | Memory map 
+|  4/4 | mmap()
+|  4/4 | i2c via Kernel
+|  5/5 | Etch-a-Sketch via flask
+|  5/5 | LCD display
+|      | Extras
+| 20/20 | **Total**
+
+*My comments are in italics. --may*
