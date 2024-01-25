@@ -25,6 +25,10 @@
 10. The lower-priority long-running interrupt that is being serviced
 11. To start the external event sooner, PREEMPT_RT by using force IRQ threads to wake up threads that are ready to be executed in the interrupt handler.
 
+## PREEMPT_RT Simulation
+
+1. The figure reference is the cyclictest.png in this directory. Based on the distribution spread for the RTOS, the upper bound of latency is 150 microseconds. In contrast, the standard Beagle OS has a much wider range of variability and doesn't seem bounded. The load I used to compare the two OS was an infinite for loop I ran in the terminal.
+
 # hw06 grading
 
 | Points      | Description | |
