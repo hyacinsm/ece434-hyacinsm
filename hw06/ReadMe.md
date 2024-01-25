@@ -27,7 +27,7 @@
 
 ## PREEMPT_RT Simulation
 
-1. The figure reference is the cyclictest.png in this directory. Based on the distribution spread for the RTOS, the upper bound of latency is 150 microseconds. In contrast, the standard Beagle OS has a much wider range of variability and doesn't seem bounded. The load I used to compare the two OS was an infinite for loop I ran in the terminal.
+1. Based on the plots the RTOS vs no RTOS had identical performance under noload conditions, which is expected. In the load configuration, the RTOS has a bound latency of approximated of 100ms. I named my files incorrectly for the load simulation, so RTOS is actually the normal OS.
 
 # hw06 grading
 
