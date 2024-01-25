@@ -23,15 +23,20 @@
 9. The mainline model is an example of long-running interrupts running on the CPU.
 
 10. The lower-priority long-running interrupt that is being serviced
+11. To start the external event sooner, PREEMPT_RT by using force IRQ threads to wake up threads that are ready to be executed in the interrupt handler.
 
-11. To start the external event sooner, PREEMPT_RT uses force IRQ threads to wake up threads ready to be executed in the interrupt handler.
+# hw06 grading
 
+| Points      | Description | |
+| ----------- | ----------- |-|
+|  2/2 | Project 
+|  5/5 | Questions
+|  4/4 | PREEMPT_RT
+|  0/2 | Plots to 500 us | *missing*
+|  0/5 | Plots - Heavy/Light load | *missing*
+|  2/2 | Extras
+| 13/20 | **Total**
 
+*My comments are in italics. --may*
 
-
-
-## PREEMPT_RT Simulation
-
-1. The figure reference is the cyclictest.png in this directory. Based on the distribution spread for the RTOS, the upper bound of latency is 150 microseconds. In contrast, the standard Beagle OS has a much wider range of variability and doesn't seem bounded. The load I used to compare the two OS was an infinite for loop I ran in the terminal.
-
-
+ | *Mainline is the main kernel tree.*
