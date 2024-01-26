@@ -15,3 +15,18 @@ gpio_test_double.c -> controling two sets of leds and push buttons with kernel d
 gpio_test_single.c -> control a single led and push button using kernel module
 led.c -> program to blink led at two different rates
 Makefile -> based on the make example exercise
+
+# hw05 grading
+
+| Points      | Description |
+| ----------- | ----------- |
+|  0/0 | Project 
+|  2/2 | Makefile
+|  5/6 | Kernel Source | Version missing
+|  6/6 | Kernel Modules: hello, ebbchar, gpio_test, led
+|  4/4 | Etch-a-Sketch
+|  2/2 | Blink at different rates
+| 19/20 | **Total**
+
+*My comments are in italics. --may*
+
