@@ -1,14 +1,9 @@
-# Stop dance for nginx
+# Boot up for flask server 
 # =======================
-#
-# ExecStop sends SIGQUIT (graceful stop) to the nginx process.
-# If, after 5s (--retry QUIT/5) nginx is still running, systemd takes control
-# and sends SIGTERM (fast shutdown) to the main process.
-# After another 5s (TimeoutStopSec=5), and if nginx is alive, systemd sends
-# SIGKILL to all the remaining processes in the process group (KillMode=mixed).
-#
-# nginx signals reference doc:
-# http://nginx.org/en/docs/control.html
+# By: Sean Hyacinthe
+# Date: 2/1/2024
+# requires download flask materials from exercises/flask/server
+# 
 #
 [Unit]
 Description=flask server started on system bootup
