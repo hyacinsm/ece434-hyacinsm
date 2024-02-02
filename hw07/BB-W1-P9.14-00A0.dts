@@ -1,7 +1,8 @@
 // SPDX-License-Identifier: GPL-2.0-only
 /*
  * Copyright (C) 2015 Robert Nelson <robertcnelson@gmail.com>
- * Virtual cape for onewire on connector pin P9.12
+ * Updated by Sean Hyacinthe in Jan 2024
+ * Virtual cape for onewire on connector pin P9.14
  */
 
 /dts-v1/;
