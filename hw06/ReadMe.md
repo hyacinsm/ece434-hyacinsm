@@ -36,10 +36,10 @@
 |  2/2 | Project 
 |  5/5 | Questions
 |  4/4 | PREEMPT_RT
-|  0/2 | Plots to 500 us | *missing*
-|  0/5 | Plots - Heavy/Light load | *missing*
+|  2/2 | Plots to 500 us | *missing (found them)*
+|  5/5 | Plots - Heavy/Light load | *missing (found them)*
 |  2/2 | Extras
-| 13/20 | **Total**
+| 20/20 | **Total**
 
 *My comments are in italics. --may*
 
