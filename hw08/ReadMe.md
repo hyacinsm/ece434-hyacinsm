@@ -11,3 +11,14 @@
     link: https://docs.google.com/spreadsheets/d/1l4uoYMaoVd4WPqNaymDagg596bNthIYDoul7f0Gw5Cw/edit?usp=sharing
 4. requirement.txt -> another method to install deps if using a virtual environment
 5. token.json -> a token used to authenticate and allow logging script to access and edit gsheet data 
+
+# hw08 grading
+
+| Points      | Description |
+| ----------- | ----------- |
+| 10          | Logging to Sheets
+|  2          | URL for sheet
+|  8          | Demo
+| 20/20 | **Total**
+
+*My comments are in italics. --may*
